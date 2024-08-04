@@ -1,4 +1,6 @@
-import { AppBar, Box, Container, Toolbar } from '@mui/material'
+import { AppBar, Container, Toolbar } from '@mui/material'
+import Toolbox from '@/components/Toolbox'
+import Canvas from '@/components/canvas'
 
 export default function Home() {
   return (
@@ -19,27 +21,8 @@ export default function Home() {
         // disableGutters
         id='main-section'
       >
-        <Box
-          sx={{
-            height: '30%',
-            width: '8%',
-            backgroundColor: '#f4f1de',
-            marginTop: '40px',
-          }}
-        >
-          {' '}
-          ToolBar
-        </Box>
-        <Box
-          sx={{
-            height: '90%',
-            width: '75%',
-            backgroundColor: '#f4f1de',
-            marginTop: '40px',
-          }}
-        >
-          <p>Drawing Board</p>
-        </Box>
+        <Toolbox />
+        <Canvas />
       </Container>
     </main>
   )
