@@ -3,6 +3,8 @@ import Pen from '@/icons/pen'
 
 import React from 'react'
 
+//read this. https://blog.logrocket.com/canvas-manipulation-react-konva/
+
 function Toolbox() {
   return (
     <Box
@@ -22,6 +24,7 @@ function Toolbox() {
 
       <Button>Eraser</Button>
       <Button>Fill-Color</Button>
+      <Button>Upload Image</Button>
     </Box>
   )
 }

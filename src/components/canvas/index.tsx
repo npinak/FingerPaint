@@ -1,48 +1,41 @@
 'use client'
 import { Box } from '@mui/material'
-import * as fabric from 'fabric'
-import React, { useRef, useEffect, useState } from 'react'
+import React, { useRef, useState } from 'react'
+import { ACTIONS } from '@/utils/constant'
+import { Stage, Layer } from 'react-konva'
 
 function Canvas() {
-  const [canvas, setCanvas] = useState<any>()
-  const canvasRef = useRef()
+  const stageRef = useRef<any>()
 
-  useEffect(() => {
-    // Initialize Fabric.js canvas
-    const canvas = new fabric.Canvas('test', {
-      // Add your canvas options here
-    })
+  const [action, setAction] = useState(ACTIONS.SELECT)
 
-    canvas.on('mouse:down', event => {
-      console.log(event)
-    })
+  //todo add dynamic stage sizing after initial setup is complete.
 
-    const rect = new fabric.Rect({
-      left: 50,
-      top: 50,
-      width: 100,
-      height: 100,
-      fill: 'red',
-      selectable: true, // Enable selection and dragging
-      hasControls: true, // Enable resizing handles
-    })
+  function onPointerDown() {}
 
-    canvas.add(rect)
-    canvasRef.current = canvas
-    console.log(canvas.getObjects())
-  }, [])
+  function onPointerMove() {}
 
-  const initCanvas = () =>
-    new fabric.Canvas('canvas', {
-      height: 800,
-      width: 800,
-      backgroundColor: 'pink',
-    })
+  function onPointerUp() {}
   return (
-    <div>
-      <h1>Fabric.js on React - fabric.Canvas('...')</h1>
-      <canvas id='canvas' ref={canvasRef} />
-    </div>
+    <Box
+      sx={{
+        height: '90%',
+        width: '75%',
+        backgroundColor: '#f4f1de',
+        marginTop: '40px',
+      }}
+    >
+      <Stage
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
+        onPointerUp={onPointerUp}
+        ref={stageRef}
+        height={200}
+        width={300}
+      >
+        <Layer></Layer>
+      </Stage>
+    </Box>
   )
 }
 
