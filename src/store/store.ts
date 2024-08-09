@@ -1,11 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
+import ToolSelectionSlice from '@/store/toolSelection'
+
 // ...
 
 export const store = configureStore({
   reducer: {
-    posts: postsReducer,
-    comments: commentsReducer,
-    users: usersReducer,
+    toolSelection: ToolSelectionSlice,
   },
 })
 
