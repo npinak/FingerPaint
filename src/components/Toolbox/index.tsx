@@ -3,7 +3,7 @@ import Pen from '@/icons/pen'
 import React from 'react'
 import { select } from '@/store/toolSelection'
 import { useAppDispatch } from '@/utils/TypeScriptHooks'
-import { MuiColorInput } from 'mui-color-input' // use for color
+import { MuiColorInput } from 'mui-color-input' // todo use for color
 
 //read this. https://blog.logrocket.com/canvas-manipulation-react-konva/
 
@@ -35,6 +35,9 @@ function Toolbox({ stageRef }: { stageRef: React.MutableRefObject<any> }) {
         flexDirection: 'column',
       }}
     >
+      <Button onClick={handleToolSelection} id='SELECT'>
+        SELECT
+      </Button>
       <Button onClick={handleToolSelection} id='SCRIBBLE'>
         <Pen />
       </Button>
