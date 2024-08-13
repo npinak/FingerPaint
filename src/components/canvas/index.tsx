@@ -18,17 +18,19 @@ import type {
   ScribbleType,
   ArrowType,
 } from './canvas.types'
-
-//todo add dynamic stage sizing after initial setup is complete.
+import { KonvaEventObject } from 'konva/lib/Node'
 
 function Canvas({ stageRef }: { stageRef: React.MutableRefObject<any> }) {
-  const [fillColor, setFillColor] = useState('#ff0000')
+  const [fillColor, _setFillColor] = useState('#ff0000')
   const [rectangles, setRectangles] = useState<RectangleType[]>([])
   const [circles, setCircles] = useState<CircleType[]>([])
   const [scribbles, setScribbles] = useState<ScribbleType[]>([])
   const [arrows, setArrows] = useState<ArrowType[]>([])
   const isPainting = useRef<boolean>(false)
-  const transformerRef = useRef<any>()
+  const transformerRef = useRef<any>() //fix: find proper type
+  const stageContainerRef = useRef<HTMLDivElement>()
+
+  console.log(stageContainerRef.current)
 
   const currentShapeID = useRef<string>('')
   const strokeColor = '#000'
@@ -170,15 +172,17 @@ function Canvas({ stageRef }: { stageRef: React.MutableRefObject<any> }) {
     }
   }
 
-  function onClick(e: React.SyntheticEvent) {
+  function onClick(e: KonvaEventObject<MouseEvent>) {
     if (toolSelected !== 'SELECT') return
     const target = e.currentTarget
 
-    transformerRef.current.nodes([target])
+    transformerRef.current?.nodes([target])
   }
 
   return (
     <Box
+      id='canvas-div'
+      ref={stageContainerRef}
       sx={{
         height: '90%',
         width: '75%',
@@ -191,12 +195,18 @@ function Canvas({ stageRef }: { stageRef: React.MutableRefObject<any> }) {
         onPointerMove={onPointerMove}
         onPointerUp={onPointerUp}
         ref={stageRef}
-        height={500}
-        width={500}
+        height={stageContainerRef.current?.offsetHeight}
+        width={stageContainerRef.current?.offsetWidth}
       >
-        {/* todo make this the same height and width as parent */}
         <Layer>
-          <Rect x={0} y={0} height={100} width={200} fill='#ffffff' id='bg' />
+          <Rect
+            x={0}
+            y={0}
+            height={stageContainerRef.current?.offsetHeight}
+            width={stageContainerRef.current?.offsetWidth}
+            fill='#ffffff'
+            id='bg'
+          />
           {rectangles.map(rectangle => {
             return (
               <Rect

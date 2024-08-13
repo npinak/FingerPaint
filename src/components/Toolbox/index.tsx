@@ -1,22 +1,29 @@
+'use client'
+
 import { Box, Button } from '@mui/material'
-import Pen from '@/icons/pen'
 import React from 'react'
 import { select } from '@/store/toolSelection'
 import { useAppDispatch } from '@/utils/TypeScriptHooks'
-import { MuiColorInput } from 'mui-color-input' // todo use for color
+import { styled } from '@mui/system'
+import { Pencil, Hand, Circle, Rectangle, ArrowUp } from '@phosphor-icons/react'
+// import { MuiColorInput } from 'mui-color-input' // todo use for color
 
-//read this. https://blog.logrocket.com/canvas-manipulation-react-konva/
+const StyledButton = styled(Button)({
+  height: '10%',
+  width: '10%',
+})
 
-function Toolbox({ stageRef }: { stageRef: React.MutableRefObject<any> }) {
+function Toolbox() {
   const dispatch = useAppDispatch()
-  function handleExport() {
-    const uri = stageRef.current.toDataURL()
-    const link = document.createElement('a')
-    link.href = uri
-    document.body.appendChild(link)
-    link.click()
-    document.body.removeChild(link)
-  }
+
+  // const _handleExport =() => {
+  //   const uri = stageRef.current.toDataURL()
+  //   const link = document.createElement('a')
+  //   link.href = uri
+  //   document.body.appendChild(link)
+  //   link.click()
+  //   document.body.removeChild(link)
+  // }
 
   const handleToolSelection = (event: React.MouseEvent<HTMLElement>) => {
     dispatch(select(event.currentTarget.id))
@@ -25,37 +32,39 @@ function Toolbox({ stageRef }: { stageRef: React.MutableRefObject<any> }) {
   return (
     <Box
       sx={{
-        height: '70%',
+        height: '50%',
+        maxHeight: '600px',
         width: '8%',
         backgroundColor: '#f4f1de',
         marginTop: '40px',
         marginBottom: '40px',
         display: 'flex',
         justifyContent: 'space-evenly',
+        alignItems: 'center',
         flexDirection: 'column',
       }}
     >
-      <Button onClick={handleToolSelection} id='SELECT'>
-        SELECT
-      </Button>
-      <Button onClick={handleToolSelection} id='SCRIBBLE'>
-        <Pen />
-      </Button>
+      <StyledButton onClick={handleToolSelection} id='SELECT'>
+        <Hand size={28} color='black' />
+      </StyledButton>
+      <StyledButton onClick={handleToolSelection} id='SCRIBBLE'>
+        <Pencil size={28} color='black' />
+      </StyledButton>
       <Button id='CIRCLE' onClick={handleToolSelection}>
-        Circle
+        <Circle size={28} color='black' />
       </Button>
       <Button id='RECTANGLE' onClick={handleToolSelection}>
-        Rectangle
+        <Rectangle size={28} color='black' />
       </Button>
       <Button id='ARROW' onClick={handleToolSelection}>
-        Arrow
+        <ArrowUp size={28} color='black' />
       </Button>
-      <Button id='ERASER' onClick={handleToolSelection}>
+      {/* <Button id='ERASER' onClick={handleToolSelection}>
         Eraser
-      </Button>
-      <Button>Fill-Color</Button>
-      <Button>Upload Image</Button>
-      <Button onClick={handleExport}>Export</Button>
+      </Button> */}
+      {/* <Button>Fill-Color</Button> */}
+      {/* <Button>Upload Image</Button> */}
+      {/* <Button onClick={handleExport}>Export</Button> */}
     </Box>
   )
 }

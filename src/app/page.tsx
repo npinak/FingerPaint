@@ -1,12 +1,13 @@
 'use client'
 import { AppBar, Container, Toolbar } from '@mui/material'
-import { useAppSelector } from '@/utils/TypeScriptHooks'
 import Toolbox from '@/components/Toolbox'
-import Canvas from '@/components/canvas'
+import Canvas from '@/components/canvas/index'
 import { useRef } from 'react'
 
 export default function Home() {
   const stageRef = useRef<any>()
+
+  console.log(stageRef.current)
 
   return (
     <main id='main-page' style={{ height: '100%', padding: '8px' }}>
@@ -22,10 +23,10 @@ export default function Home() {
           height: '92%',
           justifyContent: 'space-around',
         }}
-        maxWidth='xl'
-        id='main-section'
+        maxWidth={false}
+        id='main-container'
       >
-        <Toolbox stageRef={stageRef} />
+        <Toolbox />
         <Canvas stageRef={stageRef} />
       </Container>
     </main>

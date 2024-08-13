@@ -10,7 +10,7 @@ export type RectangleType = {
 export type ArrowType = {
   ID: string
   points: number[]
-  fill: string
+  fillColor: string
 }
 
 export type CircleType = {
