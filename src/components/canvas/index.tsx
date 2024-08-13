@@ -30,8 +30,6 @@ function Canvas({ stageRef }: { stageRef: React.MutableRefObject<any> }) {
   const transformerRef = useRef<any>() //fix: find proper type
   const stageContainerRef = useRef<HTMLDivElement>()
 
-  console.log(stageContainerRef.current)
-
   const currentShapeID = useRef<string>('')
   const strokeColor = '#000'
   const toolSelected = useAppSelector(state => state.toolSelection.value)

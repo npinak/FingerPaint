@@ -19,6 +19,7 @@
     "@mui/material-nextjs": "^5.16.4",
     "@phosphor-icons/react": "^2.1.7",
     "@reduxjs/toolkit": "^2.2.7",
+    "canvas": "^2.11.2",
     "i": "^0.3.7",
     "konva": "^9.3.14",
     "konva-react": "^0.1.0",
