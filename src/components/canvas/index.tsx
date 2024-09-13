@@ -184,7 +184,7 @@ function Canvas({ stageRef }: { stageRef: React.MutableRefObject<any> }) {
       sx={{
         height: '90%',
         width: '75%',
-        backgroundColor: '#f4f1de',
+        backgroundColor: '#ffffff',
         marginTop: '40px',
       }}
     >
