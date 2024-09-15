@@ -11,7 +11,7 @@ import {
   Transformer,
 } from 'react-konva'
 import { useAppSelector } from '@/utils/TypeScriptHooks'
-import { uuid } from 'uuidv4'
+import { v4 as uuidv4 } from 'uuid'
 import type {
   RectangleType,
   CircleType,
@@ -110,7 +110,7 @@ function Canvas({ stageRef }: { stageRef: React.MutableRefObject<any> }) {
     const stage = stageRef.current
     const { x, y } = stage.getPointerPosition()
 
-    const ID = uuid()
+    const ID = uuidv4()
 
     currentShapeID.current = ID
     isPainting.current = true
@@ -195,6 +195,7 @@ function Canvas({ stageRef }: { stageRef: React.MutableRefObject<any> }) {
         ref={stageRef}
         height={stageContainerRef.current?.offsetHeight}
         width={stageContainerRef.current?.offsetWidth}
+        // style={{ cursor: 'pointer' }} //todo delete
       >
         <Layer>
           <Rect
@@ -218,6 +219,16 @@ function Canvas({ stageRef }: { stageRef: React.MutableRefObject<any> }) {
                 height={rectangle.height}
                 width={rectangle.width}
                 onClick={onClick}
+                onMouseEnter={() => {
+                  if (stageContainerRef.current && toolSelected === 'SELECT') {
+                    stageContainerRef.current.style.cursor = 'pointer'
+                  }
+                }}
+                onMouseLeave={() => {
+                  if (stageContainerRef.current && toolSelected === 'SELECT') {
+                    stageContainerRef.current.style.cursor = 'default'
+                  }
+                }}
               />
             )
           })}
@@ -234,6 +245,16 @@ function Canvas({ stageRef }: { stageRef: React.MutableRefObject<any> }) {
                 radius={circle.radius}
                 fill={circle.fillColor}
                 onClick={onClick}
+                onMouseEnter={() => {
+                  if (stageContainerRef.current && toolSelected === 'SELECT') {
+                    stageContainerRef.current.style.cursor = 'pointer'
+                  }
+                }}
+                onMouseLeave={() => {
+                  if (stageContainerRef.current && toolSelected === 'SELECT') {
+                    stageContainerRef.current.style.cursor = 'default'
+                  }
+                }}
               />
             )
           })}
@@ -249,6 +270,16 @@ function Canvas({ stageRef }: { stageRef: React.MutableRefObject<any> }) {
               strokeWidth={2}
               fill={scribble.fillColor}
               onClick={onClick}
+              onMouseEnter={() => {
+                if (stageContainerRef.current && toolSelected === 'SELECT') {
+                  stageContainerRef.current.style.cursor = 'pointer'
+                }
+              }}
+              onMouseLeave={() => {
+                if (stageContainerRef.current && toolSelected === 'SELECT') {
+                  stageContainerRef.current.style.cursor = 'default'
+                }
+              }}
             />
           ))}
           {arrows.map(arrow => (
@@ -260,6 +291,16 @@ function Canvas({ stageRef }: { stageRef: React.MutableRefObject<any> }) {
               strokeWidth={2}
               fill={arrow.fillColor}
               onClick={onClick}
+              onMouseEnter={() => {
+                if (stageContainerRef.current && toolSelected === 'SELECT') {
+                  stageContainerRef.current.style.cursor = 'pointer'
+                }
+              }}
+              onMouseLeave={() => {
+                if (stageContainerRef.current && toolSelected === 'SELECT') {
+                  stageContainerRef.current.style.cursor = 'default'
+                }
+              }}
             />
           ))}
           <Transformer ref={transformerRef} />
