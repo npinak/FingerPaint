@@ -195,7 +195,6 @@ function Canvas({ stageRef }: { stageRef: React.MutableRefObject<any> }) {
         ref={stageRef}
         height={stageContainerRef.current?.offsetHeight}
         width={stageContainerRef.current?.offsetWidth}
-        // style={{ cursor: 'pointer' }} //todo delete
       >
         <Layer>
           <Rect
